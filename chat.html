@@ -20,12 +20,17 @@
       box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
     .name { font-weight: bold; }
+    .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    }
   </style>
 </head>
 <body>
   
   <h2>Chat</h2>
-
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf2jh7p9NQ4eOf17uhHCkSc6zG5R6YLgkgFCtSvKnFyYLCv3A/viewform?embedded=true" width="400" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
   <div id="chatBox"></div>
 
 <script>
@@ -56,8 +61,9 @@
     }
 
     loadChat();
+  
     setInterval(loadChat, refreshInterval);
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf2jh7p9NQ4eOf17uhHCkSc6zG5R6YLgkgFCtSvKnFyYLCv3A/viewform?embedded=true" width="400" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+  
   </script>
 
 </body>
