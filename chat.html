@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynaland Chat</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #chatBox { 
+      border: 1px solid #ccc; 
+      padding: 10px; 
+      height: 400px; 
+      overflow-y: scroll; 
+      background: #f7f7f7;
+    }
+    .msg { 
+      margin-bottom: 12px; 
+      padding: 8px; 
+      background: white; 
+      border-radius: 6px; 
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .name { font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h2>Chat</h2>
+
+  <div id="chatBox"></div>
+
+
+    const sheetId = "1l_bqsNu--SrVtAJfXbrrBH5YHRmub1xTYUlRGuqCu7k";
+    const sheetUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=Form%20Responses%201`;
+    const refreshInterval = 2000; //refresh time
+
+    // ---- LOAD MESSAGES FROM GOOGLE SHEET ----
+    function loadChat() {
+      fetch(sheetUrl)
+        .then(r => r.text())
+        .then(csv => {
+          const rows = csv.trim().split("\n").map(r => r.split(",")).reverse();
+          const chatBox = document.getElementById("chatBox");
+          chatBox.innerHTML = "";
+
+          rows.slice(0, -1).forEach(row => {
+            const timestamp = row[0];
+            const name = row[1];
+            const message = row[2];
+
+            const div = document.createElement("div");
+            div.className = "msg";
+            div.innerHTML = `<div class="name">${name}</div>${message}`;
+            chatBox.appendChild(div);
+          });
+        });
+    }
+
+    loadChat();
+    setInterval(loadChat, refreshInterval);
+  </script>
+
+</body>
+</html>
